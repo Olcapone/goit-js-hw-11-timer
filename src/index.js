@@ -1,4 +1,5 @@
 import './sass/main.scss';
+let _ = require('lodash');
 
 const refs = {
     timerFace: document.querySelector('#timer-1'),
@@ -6,6 +7,7 @@ const refs = {
     hoursFace: document.querySelector('span[data-value = "hours"]'),
     minutesFace: document.querySelector('span[data-value = "mins"]'),
     secondsFace: document.querySelector('span[data-value = "secs"]'),
+    inputTime: document.querySelector('input')
 };
 
 function pad(value) {
@@ -21,8 +23,6 @@ function countDays (time) {
 
     const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
 
-    console.log({ days, hours, mins, secs });
-
     return { days, hours, mins, secs };
 };
 
@@ -35,7 +35,7 @@ function updateTimerFace(timeComp) {
     refs.secondsFace.textContent = secs;
 };
 
-export default class Timer {
+class Timer {
 
     constructor(times){
         this.timerInterval = null,
@@ -52,7 +52,8 @@ export default class Timer {
             
             const deltaTime =this.times - currentTime ;           
             const timeComponents = countDays(deltaTime);
-            
+
+            refs.timerFace.classList.remove('is-hidden');
             updateTimerFace(timeComponents);
         }, 1000);
     }
@@ -61,8 +62,21 @@ export default class Timer {
 };
 
 
-const oneTime = Date.parse(new Date('Jul 17, 2021'));
+let oneTime = null;
 
-const timer = new Timer(oneTime);
 
- timer.start();
+
+
+ 
+refs.inputTime.addEventListener('change', _.debounce(setupDate, 500));
+
+function setupDate(e) {
+
+    let customDate = e.target.value;
+    oneTime = Date.parse(customDate);
+   
+    const timer = new Timer(oneTime);
+    timer.start();
+   
+}
+    

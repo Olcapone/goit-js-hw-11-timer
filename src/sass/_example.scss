@@ -8,6 +8,26 @@ body {
   line-height: 1.7;
   text-transform: uppercase;
 }
+.timer_container {
+  position: relative;
+}
+
+.new_date {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  color: white;
+}
+
+.new_date input {
+  width: 200px;
+  height: 40px;
+  text-transform: uppercase;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 20px;
+  letter-spacing: 0.2em;
+}
 
 .timer {
   display: flex;
@@ -19,12 +39,12 @@ body {
   box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.15), 0 15px 90px 30px rgba(0, 0, 0, 0.25);
 }
 
-// .is-hidden {
-//   opacity: 0;
-//   visibility: hidden;
-//   pointer-events: none;
-//   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-// }
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 .field {
   display: flex;
